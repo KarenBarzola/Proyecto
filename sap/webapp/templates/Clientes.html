@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/22ad93d1da.js" crossorigin="anonymous"></script>
+
+    <title>Sistema de Administracion de Eventos</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<body style="background-color:aquamarine;">
+
+<div class="panel panel-primary" align="center">
+
+    <h1 class="display-6">Sistema de Administracion de Eventos</h1>
+<p>Clientes Ingresados: {{cantidad}}</p>
+</div>
+<div>
+    <a class="btn btn-info" href="agregar_cliente/"><i class="fa-solid fa-user-plus"></i></a>
+</div>
+<div class="table-responsive" align="center">
+
+<table class="table table-success table-hover table-striped table-bordered table-sm align-middle caption-top text-center table-condensed">
+    <caption>Listado Clientes</caption>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Pago</th>
+        <th>Direccion</th>
+        <th>Correo</th>
+        <th>Tipo evento</th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+
+    </tr>
+    <tbody class="table-group-divider">
+        {% for cliente in clientes %}
+            <tr>
+                <td>{{cliente.id}}</td>
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.apellido}}</td>
+
+                <td>{% if cliente.pago == 'Co' %} Contado {% elif cliente.pago == 'Cr' %} Credito {% endif %}</td>
+                <td>{{cliente.direccion}}</td>
+                <td>{{cliente.correo}}</td>
+                <td>{{cliente.tipo.nombre_evento}}</td>
+
+                <td><a class="btn btn-primary" href="ver_cliente/{{cliente.id}}"><i class="fa-solid fa-eye"></i></a></td>
+                <td><a class="btn btn-success" href="editar_cliente/{{cliente.id}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a class="btn btn-warning" href="eliminar_cliente/{{cliente.id}}"><i class="fa-solid fa-trash-can"></i></a></td>
+
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </div>
+</body>
+</html>
